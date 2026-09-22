@@ -1,25 +1,29 @@
-# CODING AGENTS: READ THIS FIRST
+# Horizen Gym
 
-This is a **handoff bundle** from Claude Design (claude.ai/design).
+The Horizen Gym member app and the backend that replaces GymMaster.
 
-A user mocked up designs in HTML/CSS/JS using an AI design tool, then exported this bundle so a coding agent can implement the designs for real.
+| Folder | What it is |
+| --- | --- |
+| [`horizen-app/`](horizen-app/) | Member app: Expo (React Native) + TypeScript, for iOS and Android |
+| [`horizen-backend/`](horizen-backend/) | API server: Node + TypeScript + Postgres, with Paystack payments |
+| [`project/`](project/) | Original Claude Design prototype (HTML), images and design notes |
+| [`chats/`](chats/) | Design conversation history |
 
-## What you should do — IMPORTANT
+## See the app on your phone (about 5 minutes)
 
-**Read the chat transcripts first.** There are 1 chat transcript(s) in `chats/`. The transcripts show the full back-and-forth between the user and the design assistant — they tell you **what the user actually wants** and **where they landed** after iterating. Don't skip them. The final HTML files are the output, but the chat is where the intent lives.
+You need [Node.js](https://nodejs.org) 20+ on your computer and **Expo Go** on your phone ([iPhone](https://apps.apple.com/app/expo-go/id982107779) · [Android](https://play.google.com/store/apps/details?id=host.exp.exponent)).
 
-**Read `project/Horizen App v2.dc.html` in full.** The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
+```bash
+git clone <this repo's URL>
+cd <repo folder>/horizen-app
+npm install
+npx expo start
+```
 
-**If anything is ambiguous, ask the user to confirm before you start implementing.** It's much cheaper to clarify scope up front than to build the wrong thing.
+A **QR code** appears in the terminal:
+- **iPhone:** scan it with the Camera app.
+- **Android:** scan it from inside Expo Go.
 
-## About the design files
+The phone and computer need to be on the same Wi‑Fi. If the phone can't connect, run `npx expo start --tunnel`.
 
-The design medium is **HTML/CSS/JS** — these are prototypes, not production code. Your job is to **recreate them pixel-perfectly** in whatever technology makes sense for the target codebase (React, Vue, native, whatever fits). Match the visual output; don't copy the prototype's internal structure unless it happens to fit.
-
-**Don't render these files in a browser or take screenshots unless the user asks you to.** Everything you need — dimensions, colors, layout rules — is spelled out in the source. Read the HTML and CSS directly; a screenshot won't tell you anything they don't.
-
-## Bundle contents
-
-- `README.md` — this file
-- `chats/` — conversation transcripts (read these!)
-- `project/` — the `Horizen Gym App Version 1` project files (HTML prototypes, assets, components)
+The app starts with sample data, so any email and password signs you in. To run it against the real backend, see [`horizen-backend/README.md`](horizen-backend/README.md).

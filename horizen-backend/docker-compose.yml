@@ -1,0 +1,19 @@
+# Local production-like setup: `docker compose up --build`
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: horizen
+      POSTGRES_PASSWORD: horizen
+      POSTGRES_DB: horizen
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  api:
+    build: .
+    depends_on: [db]
+    ports: ['3000:3000']
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://horizen:horizen@db:5432/horizen
+volumes:
+  pgdata:
