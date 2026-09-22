@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#EAE3E0;}
+  *{box-sizing:border-box;font-family:'Manrope',Helvetica,sans-serif;}
+  ::-webkit-scrollbar{display:none;}
+  input::placeholder{color:#C2B3AF;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px;background:#EAE3E0;">
+<div style="width:390px;height:844px;background:#F9EDED;border-radius:44px;overflow:hidden;position:relative;box-shadow:0 30px 80px rgba(40,20,20,0.35);border:1px solid rgba(0,0,0,0.08);" data-screen-label="Phone">
+
+  <!-- ══════════ ONBOARDING ══════════ -->
+  <sc-if value="{{ isOnboarding }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Onboarding" style="position:absolute;inset:0;background:url('assets/gym.jpg') center/cover no-repeat #161211;display:flex;flex-direction:column;color:#F7EDEA;">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,10,9,0.55) 0%,rgba(15,10,9,0.15) 40%,rgba(15,10,9,0.92) 100%);"></div>
+      <div style="position:relative;flex:1;display:flex;flex-direction:column;padding:32px 28px;">
+        <div style="display:flex;align-items:center;gap:9px;margin-top:112px;justify-content:center;">
+          <span style="font-size:32px;font-weight:800;letter-spacing:11px;color:#FDF6F4;">H</span>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FDF6F4" style="margin-left:-8px;flex:none;"><circle cx="12" cy="12" r="10" stroke-width="2.6"></circle><path d="M6.5 10.5c1.4-1.5 2.8-1.5 4.1 0s2.7 1.5 4.1 0 2.2-1.1 2.8-.6" stroke-width="2" stroke-linecap="round"></path><path d="M6.5 14.6c1.4-1.5 2.8-1.5 4.1 0s2.7 1.5 4.1 0 2.2-1.1 2.8-.6" stroke-width="2" stroke-linecap="round"></path></svg>
+          <span style="font-size:32px;font-weight:800;letter-spacing:11px;color:#FDF6F4;">RIZEN</span>
+        </div>
+        <div style="flex:1;"></div>
+        <div style="font-size:36px;font-weight:800;line-height:1.14;letter-spacing:0.3px;">MORE THAN<br>A GYM.<br><span style="color:#F3C4C4;">A COMMUNITY.</span></div>
+        <div style="margin-top:16px;font-size:15px;color:#C4B5B1;line-height:1.55;">Train. Grow. Belong.<br>Welcome to Horizen.</div>
+        <button onClick="{{ goLogin }}" style="margin-top:28px;width:100%;padding:17px 24px;border:none;border-radius:20px;background:#F5CBCB;color:#17120F;font-size:13px;font-weight:800;letter-spacing:2.5px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;" style-hover="background:#F0BABA;">GET STARTED
+          <span style="width:28px;height:28px;border-radius:50%;background:#17120F;color:#F5CBCB;display:inline-flex;align-items:center;justify-content:center;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══════════ LOGIN ══════════ -->
+  <sc-if value="{{ isLogin }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Login" style="position:absolute;inset:0;overflow:auto;background:#F9EDED;padding:58px 28px 40px;animation:fadeUp 0.3s ease;display:flex;flex-direction:column;">
+      <button onClick="{{ goOnboarding }}" style="width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #F3E0E0;cursor:pointer;color:#17120F;display:flex;align-items:center;justify-content:center;flex:none;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+      </button>
+
+      <span style="width:220px;height:74px;overflow:hidden;display:block;position:relative;margin:26px 0 0 -6px;flex:none;">
+        <img src="assets/logo.png" alt="Horizen Gym" style="width:220px;height:220px;position:absolute;left:0;top:-73px;mix-blend-mode:multiply;">
+      </span>
+
+      <div style="font-size:28px;font-weight:800;color:#17120F;letter-spacing:-0.3px;margin-top:10px;">Welcome back</div>
+      <div style="font-size:14px;color:#9A8B87;margin-top:5px;">Sign in to continue your training.</div>
+
+      <div style="margin-top:28px;display:flex;flex-direction:column;gap:12px;">
+        <div style="background:#fff;border:1.5px solid {{ emailBorder }};border-radius:18px;padding:15px 18px;display:flex;flex-direction:column;gap:3px;">
+          <span style="font-size:10px;font-weight:800;letter-spacing:1px;color:#B5A29E;text-transform:uppercase;">Email</span>
+          <input value="{{ email }}" onChange="{{ setEmail }}" type="email" placeholder="you@example.com" style="border:none;outline:none;background:transparent;font-size:14.5px;font-weight:700;color:#17120F;">
+        </div>
+        <div style="background:#fff;border:1.5px solid {{ pwBorder }};border-radius:18px;padding:15px 18px;display:flex;align-items:center;gap:12px;">
+          <div style="flex:1;display:flex;flex-direction:column;gap:3px;min-width:0;">
+            <span style="font-size:10px;font-weight:800;letter-spacing:1px;color:#B5A29E;text-transform:uppercase;">Password</span>
+            <input value="{{ password }}" onChange="{{ setPassword }}" type="{{ pwType }}" placeholder="••••••••" style="border:none;outline:none;background:transparent;font-size:14.5px;font-weight:700;color:#17120F;width:100%;">
+          </div>
+          <button onClick="{{ togglePw }}" style="border:none;background:transparent;cursor:pointer;color:#B5A29E;padding:4px;display:flex;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12z"></path><circle cx="12" cy="12" r="2.6"></circle></svg>
+          </button>
+        </div>
+      </div>
+
+      <sc-if value="{{ loginError }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:12px;font-size:12.5px;font-weight:700;color:#D2504F;">Please enter your email and password.</div>
+      </sc-if>
+
+      <div style="display:flex;justify-content:flex-end;margin-top:12px;">
+        <a href="#" style="font-size:12.5px;font-weight:800;color:#17120F;text-decoration:none;">Forgot password?</a>
+      </div>
+
+      <button onClick="{{ submitLogin }}" style="margin-top:22px;width:100%;padding:17px 24px;border:none;border-radius:20px;background:#17120F;color:#F5CBCB;font-size:13px;font-weight:800;letter-spacing:2.5px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;" style-hover="background:#2a221e;">SIGN IN
+        <span style="width:28px;height:28px;border-radius:50%;background:#F5CBCB;color:#17120F;display:inline-flex;align-items:center;justify-content:center;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </span>
+      </button>
+
+      <div style="display:flex;align-items:center;gap:14px;margin-top:26px;">
+        <span style="flex:1;height:1px;background:#EBD8D8;"></span>
+        <span style="font-size:11px;font-weight:800;letter-spacing:1px;color:#B5A29E;">OR</span>
+        <span style="flex:1;height:1px;background:#EBD8D8;"></span>
+      </div>
+
+      <button onClick="{{ goHome }}" style="margin-top:22px;width:100%;padding:16px;border:1.5px solid #E8CFCF;border-radius:20px;background:#fff;color:#17120F;font-size:13px;font-weight:800;letter-spacing:0.3px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;" style-hover="background:#FDF6F4;">
+        <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.06-1.4-.18-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4z"></path><path fill="#34A853" d="M12 21.5c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1a5.9 5.9 0 0 1-5.5-4H3.2v2.6A10 10 0 0 0 12 21.5z"></path><path fill="#FBBC05" d="M6.5 13.6a6 6 0 0 1 0-3.8V7.2H3.2a10 10 0 0 0 0 9z"></path><path fill="#EA4335" d="M12 6.4c1.5 0 2.8.5 3.8 1.5L18.7 5A10 10 0 0 0 3.2 7.2l3.3 2.6A5.9 5.9 0 0 1 12 6.4z"></path></svg>
+        Continue with Google</button>
+
+      <div style="flex:1;"></div>
+      <div style="margin-top:26px;text-align:center;font-size:13px;color:#9A8B87;font-weight:600;">New to Horizen? <a href="#" style="color:#17120F;font-weight:800;text-decoration:none;">Join now</a></div>
+    </div>
+  </sc-if>
+
+  <!-- ══════════ STATUS BAR ══════════ -->
+  <sc-if value="{{ notOnboarding }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;top:0;left:0;right:0;height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:40;color:{{ statusColor }};font-size:13px;font-weight:800;pointer-events:none;">
+      <span style="letter-spacing:0.3px;">20:44</span>
+      <span style="display:flex;align-items:center;gap:6px;">
+        <span style="display:flex;align-items:flex-end;gap:1.5px;"><span style="width:3px;height:4px;background:currentColor;border-radius:1px;"></span><span style="width:3px;height:6px;background:currentColor;border-radius:1px;"></span><span style="width:3px;height:8px;background:currentColor;border-radius:1px;"></span><span style="width:3px;height:10px;background:currentColor;border-radius:1px;"></span></span>
+        <span style="width:21px;height:11px;border:1.5px solid currentColor;border-radius:3.5px;display:inline-flex;padding:1.5px;opacity:0.9;"><span style="width:70%;background:currentColor;border-radius:1px;"></span></span>
+      </span>
+    </div>
+  </sc-if>
+
+  <!-- ══════════ HOME ══════════ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Home" style="position:absolute;inset:0;overflow:auto;padding:58px 24px 116px;animation:fadeUp 0.3s ease;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <span style="width:150px;height:50px;overflow:hidden;display:block;position:relative;">
+          <img src="assets/logo.png" alt="Horizen Gym" style="width:150px;height:150px;position:absolute;left:0;top:-50px;mix-blend-mode:multiply;">
+        </span>
+
+        <span style="width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #F3E0E0;display:flex;align-items:center;justify-content:center;color:#17120F;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 5-2 6.5-2 6.5h16S18 14 18 9"></path><path d="M10.3 20a2 2 0 0 0 3.4 0"></path></svg>
+        </span>
+      </div>
+
+      <div style="margin-top:24px;">
+        <div style="font-size:15px;color:#9A8B87;font-weight:600;">Good evening,</div>
+        <div style="font-size:31px;font-weight:800;color:#17120F;letter-spacing:-0.3px;">Sam 👋</div>
+        <div style="font-size:13.5px;color:#9A8B87;margin-top:4px;">Let's keep your momentum going.</div>
+      </div>
+
+      <div style="margin-top:22px;background:#F1D6D6;border-radius:24px;padding:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+        <div style="display:flex;flex-direction:column;">
+          <div style="font-size:16px;font-weight:800;color:#17120F;">Check-in</div>
+          <div style="font-size:12.5px;color:#8F7C78;margin-top:3px;">Scan to check-in</div>
+          <span style="margin-top:16px;width:32px;height:32px;border-radius:50%;background:#17120F;color:#F5CBCB;display:flex;align-items:center;justify-content:center;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </span>
+        </div>
+        <div style="width:96px;height:96px;background:#fff;border-radius:16px;padding:9px;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(7,1fr);gap:2px;flex:none;">
+          <sc-for list="{{ qrCells }}" as="c" hint-placeholder-count="49">
+            <span style="border-radius:1px;background:{{ c }};"></span>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="margin-top:14px;background:#17120F;border-radius:24px;padding:20px;color:#FDF6F4;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:15px;font-weight:800;">Membership</span>
+          <sc-if value="{{ memberActive }}" hint-placeholder-val="{{ true }}">
+            <span style="font-size:10.5px;font-weight:800;letter-spacing:2px;color:#F5CBCB;background:rgba(245,203,203,0.12);border-radius:100px;padding:5px 11px;">ACTIVE</span>
+          </sc-if>
+          <sc-if value="{{ memberExpired }}" hint-placeholder-val="{{ false }}">
+            <span style="font-size:10.5px;font-weight:800;letter-spacing:2px;color:#E89090;background:rgba(232,144,144,0.12);border-radius:100px;padding:5px 11px;">EXPIRED</span>
+          </sc-if>
+        </div>
+        <div style="margin-top:16px;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:#A99B97;">
+          <span style="display:flex;align-items:center;gap:8px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5CBCB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4 4 5-7 5 7 4-4v9H3z"></path></svg>
+            Valid until</span>
+          <span style="color:#FDF6F4;font-weight:700;">31 Aug 2026</span>
+        </div>
+      </div>
+
+      <div style="margin-top:28px;display:flex;justify-content:space-between;align-items:baseline;">
+        <span style="font-size:16px;font-weight:800;color:#17120F;">Today's overview</span>
+        <a href="#" onClick="{{ goProgress }}" style="font-size:12px;color:#9A8B87;font-weight:700;text-decoration:none;">View all</a>
+      </div>
+      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+        <sc-for list="{{ statCards }}" as="st" hint-placeholder-count="3">
+          <div style="background:#fff;border:1px solid #F3E0E0;border-radius:20px;padding:16px 14px;display:flex;flex-direction:column;align-items:flex-start;">
+            <span style="width:30px;height:30px;border-radius:10px;background:#F9EDED;display:flex;align-items:center;justify-content:center;color:#17120F;">{{ st.icon }}</span>
+            <span style="font-size:10.5px;color:#9A8B87;font-weight:700;margin-top:12px;">{{ st.label }}</span>
+            <span style="font-size:20px;font-weight:800;color:#17120F;line-height:1.1;margin-top:3px;">{{ st.value }}</span>
+            <span style="font-size:10px;color:#C2B3AF;font-weight:600;margin-top:2px;">{{ st.sub }}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="margin-top:28px;display:flex;justify-content:space-between;align-items:baseline;">
+        <span style="font-size:16px;font-weight:800;color:#17120F;">Upcoming class</span>
+        <a href="#" onClick="{{ goSchedule }}" style="font-size:12px;color:#9A8B87;font-weight:700;text-decoration:none;">View all</a>
+      </div>
+      <div onClick="{{ goClassDetail }}" style="margin-top:12px;background:linear-gradient(90deg,rgba(15,10,9,0.92) 30%,rgba(15,10,9,0.55)),url('assets/coach.jpg') center 25%/cover no-repeat #161211;border-radius:24px;padding:22px;color:#FDF6F4;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:transform 0.15s ease;" style-hover="transform:scale(1.015);">
+        <div style="display:flex;flex-direction:column;gap:3px;">
+          <span style="font-size:17px;font-weight:800;">HIIT Strength</span>
+          <span style="font-size:12.5px;color:#A99B97;">Today • 18:00</span>
+          <span style="font-size:12px;color:#8a7c78;">with Coach Lindiwe</span>
+        </div>
+        <span style="width:40px;height:40px;border-radius:50%;background:#F5CBCB;color:#17120F;display:flex;align-items:center;justify-content:center;flex:none;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </span>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══════════ CLASSES ══════════ -->
+  <sc-if value="{{ isClasses }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Classes" style="position:absolute;inset:0;overflow:auto;padding:58px 24px 116px;animation:fadeUp 0.3s ease;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button onClick="{{ goHome }}" style="width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #F3E0E0;cursor:pointer;color:#17120F;display:flex;align-items:center;justify-content:center;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+          </button>
+          <span style="font-size:21px;font-weight:800;color:#17120F;">Classes</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <span style="width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #F3E0E0;display:flex;align-items:center;justify-content:center;color:#17120F;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16l-6 7v6l-4 2v-8z"></path></svg>
+          </span>
+          <span style="width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #F3E0E0;display:flex;align-items:center;justify-content:center;color:#17120F;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+          </span>
+        </div>
+      </div>
+
+      <div style="margin-top:22px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;">
+        <sc-for list="{{ days }}" as="day" hint-placeholder-count="5">
+          <button onClick="{{ day.go }}" style="border:1px solid {{ day.border }};border-radius:18px;padding:13px 0;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;background:{{ day.bg }};color:{{ day.fg }};transition:all 0.15s ease;" style-hover="opacity:0.85;">
+            <span style="font-size:9.5px;font-weight:800;letter-spacing:1.2px;opacity:0.7;">{{ day.name }}</span>
+            <span style="font-size:17px;font-weight:800;">{{ day.num }}</span>
+          </button>
+        </sc-for>
+      </div>
+
+      <div style="margin-top:26px;font-size:15px;font-weight:800;color:#17120F;">Morning</div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px;">
+        <sc-for list="{{ morningClasses }}" as="cls" hint-placeholder-count="3">
+          <div style="background:#fff;border:1px solid #F3E0E0;border-radius:22px;padding:12px;display:flex;align-items:center;gap:14px;">
+            <span style="font-size:13px;font-weight:800;color:#17120F;width:46px;text-align:center;flex:none;">{{ cls.time }}</span>
+            <div onClick="{{ cls.open }}" style="flex:1;display:flex;flex-direction:column;gap:2px;cursor:pointer;min-width:0;">
+              <span style="font-size:15px;font-weight:800;color:#17120F;">{{ cls.name }}</span>
+              <span style="font-size:12px;color:#9A8B87;font-weight:600;">{{ cls.meta }}</span>
+              <span style="font-size:11.5px;color:#C2B3AF;font-weight:600;">Coach {{ cls.coach }}</span>
+            </div>
+            <div style="width:76px;height:66px;border-radius:16px;background:url('{{ cls.photo }}') center/cover no-repeat #161211;position:relative;flex:none;">
+              <button onClick="{{ cls.toggle }}" style="position:absolute;top:5px;right:5px;width:24px;height:24px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;background:{{ cls.bmBg }};color:{{ cls.bmFg }};">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="{{ cls.bmFill }}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>
+              </button>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="margin-top:26px;font-size:15px;font-weight:800;color:#17120F;">Evening</div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px;">
+        <sc-for list="{{ eveningClasses }}" as="cls" hint-placeholder-count="1">
+          <div style="background:#fff;border:1px solid #F3E0E0;border-radius:22px;padding:12px;display:flex;align-items:center;gap:14px;">
+            <span style="font-size:13px;font-weight:800;color:#17120F;width:46px;text-align:center;flex:none;">{{ cls.time }}</span>
+            <div onClick="{{ cls.open }}" style="flex:1;display:flex;flex-direction:column;gap:2px;cursor:pointer;min-width:0;">
+              <span style="font-size:15px;font-weight:800;color:#17120F;">{{ cls.name }}</span>
+              <span style="font-size:12px;color:#9A8B87;font-weight:600;">{{ cls.meta }}</span>
+              <span style="font-size:11.5px;color:#C2B3AF;font-weight:600;">Coach {{ cls.coach }}</span>
+            </div>
+            <div style="width:76px;height:66px;border-radius:16px;background:url('{{ cls.photo }}') center/cover no-repeat #161211;position:relative;flex:none;">
+              <button onClick="{{ cls.toggle }}" style="position:absolute;top:5px;right:5px;width:24px;height:24px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;background:{{ cls.bmBg }};color:{{ cls.bmFg }};">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="{{ cls.bmFill }}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>
+              </button>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══════════ CLASS DETAIL ══════════ -->
+  <sc-if value="{{ isClassDetail }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Class detail" style="position:absolute;inset:0;overflow:auto;background:#17120F;padding:58px 24px 40px;animation:fadeUp 0.3s ease;color:#FDF6F4;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <button onClick="{{ goClasses }}" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;cursor:pointer;color:#FDF6F4;display:flex;align-items:center;justify-content:center;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+        </button>
+        <span style="font-size:16px;font-weight:800;">Class details</span>
+        <span style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M7 8l5-5 5 5"></path><path d="M5 14v6h14v-6"></path></svg>
+        </span>
+      </div>
+
+      <div style="margin-top:18px;height:270px;border-radius:28px;background:url('assets/coach.jpg') center 20%/cover no-repeat #241d1a;position:relative;overflow:hidden;">
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:22px;background:linear-gradient(180deg,transparent,rgba(15,10,9,0.92));">
+          <div style="font-size:32px;font-weight:800;color:#FDF6F4;line-height:1.08;letter-spacing:-0.3px;">HIIT<br>Strength</div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;display:flex;gap:8px;">
+        <span style="background:rgba(255,255,255,0.1);border-radius:100px;padding:8px 15px;font-size:11.5px;font-weight:700;">45 Min</span>
+        <span style="background:rgba(255,255,255,0.1);border-radius:100px;padding:8px 15px;font-size:11.5px;font-weight:700;">High Intensity</span>
+        <span style="background:rgba(255,255,255,0.1);border-radius:100px;padding:8px 15px;font-size:11.5px;font-weight:700;">All levels</span>
+      </div>
+
+      <div style="margin-top:26px;font-size:16px;font-weight:800;">About this class</div>
+      <div style="margin-top:8px;font-size:13.5px;line-height:1.65;color:#A99B97;">A high-energy full-body workout designed to build strength, increase endurance and burn fat.</div>
+
+      <div style="margin-top:22px;display:flex;align-items:center;gap:14px;background:rgba(255,255,255,0.06);border-radius:20px;padding:14px 16px;">
+        <span style="width:46px;height:46px;border-radius:50%;background:url('assets/coach.jpg') center 15%/cover no-repeat;flex:none;"></span>
+        <div style="display:flex;flex-direction:column;gap:1px;">
+          <span style="font-size:10.5px;color:#8a7c78;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Coach</span>
+          <span style="font-size:15px;font-weight:800;">Lindiwe Dlamini</span>
+          <span style="font-size:12px;color:#A99B97;">HIIT Specialist</span>
+        </div>
+      </div>
+
+      <sc-if value="{{ notBooked }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ bookClass }}" style="margin-top:26px;width:100%;padding:17px 24px;border:none;border-radius:20px;background:#F5CBCB;color:#17120F;font-size:13px;font-weight:800;letter-spacing:2.5px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;" style-hover="background:#F0BABA;">BOOK CLASS
+          <span style="width:28px;height:28px;border-radius:50%;background:#17120F;color:#F5CBCB;display:inline-flex;align-items:center;justify-content:center;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </span>
+        </button>
+      </sc-if>
+      <sc-if value="{{ booked }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ bookClass }}" style="margin-top:26px;width:100%;padding:17px;border:1.5px solid #F5CBCB;border-radius:20px;background:transparent;color:#F5CBCB;font-size:13px;font-weight:800;letter-spacing:2.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l6 6L20 6"></path></svg>
+          BOOKED — TODAY 18:00</button>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <!-- ══════════ SCHEDULE ══════════ -->
+  <sc-if value="{{ isSchedule }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="My schedule" style="position:absolute;inset:0;overflow:auto;padding:58px 24px 116px;animation:fadeUp 0.3s ease;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button onClick="{{ goHome }}" style="width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #F3E0E0;cursor:pointer;color:#17120F;display:flex;align-items:center;justify-content:center;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+          </button>
+          <span style="font-size:21px;font-weight:800;color:#17120F;">My schedule</span>
+        </div>
+        <span style="width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #F3E0E0;display:flex;align-items:center;justify-content:center;color:#17120F;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+        </span>
+      </div>
+
+      <div style="margin-top:20px;display:flex;background:#F0DBDB;border-radius:100px;padding:4px;gap:4px;">
+        <button onClick="{{ schedUpcoming }}" style="flex:1;border:none;border-radius:100px;padding:11px;font-size:13px;font-weight:800;cursor:pointer;background:{{ upcomingBg }};color:#17120F;box-shadow:{{ upcomingShadow }};transition:all 0.15s ease;">Upcoming</button>
+        <button onClick="{{ schedPast }}" style="flex:1;border:none;border-radius:100px;padding:11px;font-size:13px;font-weight:800;cursor:pointer;background:{{ pastBg }};color:#17120F;box-shadow:{{ pastShadow }};transition:all 0.15s ease;">Past</button>
+      </div>
+
+      <div style="margin-top:24px;font-size:15px;font-weight:800;color:#17120F;">{{ schedTitle }}</div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px;">
+        <sc-for list="{{ schedItems }}" as="it" hint-placeholder-count="3">
+          <div style="background:#fff;border:1px solid #F3E0E0;border-radius:22px;padding:12px;display:flex;align-items:center;gap:14px;">
+            <div style="width:50px;display:flex;flex-direction:column;align-items:center;gap:2px;background:#F9EDED;border-radius:16px;padding:11px 0;flex:none;">
+              <span style="font-size:9px;font-weight:800;color:#CB9C9C;letter-spacing:1.2px;">{{ it.dow }}</span>
+              <span style="font-size:16px;font-weight:800;color:#17120F;">{{ it.dom }}</span>
+            </div>
+            <div onClick="{{ it.open }}" style="flex:1;display:flex;flex-direction:column;gap:2px;cursor:pointer;min-width:0;">
+              <span style="font-size:12px;color:#9A8B87;font-weight:700;">{{ it.time }}</span>
+              <span style="font-size:15px;font-weight:800;color:#17120F;">{{ it.name }}</span>
+              <span style="font-size:11.5px;color:#C2B3AF;font-weight:600;">Coach {{ it.coach }} • {{ it.dur }}</span>
+            </div>
+            <div style="width:68px;height:60px;border-radius:16px;background:url('{{ it.photo }}') center/cover no-repeat #161211;flex:none;"></div>
+          </div>
+        </sc-for>
+      </div>
+
+      <button onClick="{{ goClasses }}" style="margin-top:24px;width:100%;padding:16px 24px;border:none;border-radius:20px;background:#F5CBCB;color:#17120F;font-size:12.5px;font-weight:800;letter-spacing:2.5px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;" style-hover="background:#F0BABA;">VIEW FULL SCHEDULE
+        <span style="width:26px;height:26px;border-radius:50%;background:#17120F;color:#F5CBCB;display:inline-flex;align-items:center;justify-content:center;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </span>
+      </button>
+    </div>
+  </sc-if>
+
+  <!-- ══════════ PROGRESS ══════════ -->
+  <sc-if value="{{ isProgress }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="My progress" style="position:absolute;inset:0;overflow:auto;padding:58px 24px 116px;animation:fadeUp 0.3s ease;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button onClick="{{ goHome }}" style="width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #F3E0E0;cursor:pointer;color:#17120F;display:flex;align-items:center;justify-content:center;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+          </button>
+          <span style="font-size:21px;font-weight:800;color:#17120F;">My progress</span>
+        </div>
+        <span style="width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #F3E0E0;display:flex;align-items:center;justify-content:center;color:#17120F;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+        </span>
+      </div>
+
+      <div style="margin-top:20px;display:flex;gap:6px;">
+        <sc-for list="{{ progTabs }}" as="t" hint-placeholder-count="3">
+          <button onClick="{{ t.go }}" style="border:none;border-radius:100px;padding:10px 20px;font-size:12.5px;font-weight:800;cursor:pointer;background:{{ t.bg }};color:{{ t.fg }};transition:all 0.15s ease;">{{ t.name }}</button>
+        </sc-for>
+      </div>
+
+      <div style="margin-top:24px;font-size:15px;font-weight:800;color:#17120F;">This week</div>
+
+      <div style="margin-top:12px;background:#fff;border:1px solid #F3E0E0;border-radius:24px;padding:20px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div style="font-size:11.5px;color:#9A8B87;font-weight:700;">Calories</div>
+            <div style="font-size:26px;font-weight:800;color:#17120F;margin-top:2px;">1 240 <span style="font-size:13px;color:#C2B3AF;font-weight:600;">kcal</span></div>
+          </div>
+          <div style="background:#F9EDED;border-radius:14px;padding:9px 14px;text-align:right;">
+            <div style="font-size:9.5px;color:#9A8B87;font-weight:800;letter-spacing:0.5px;text-transform:uppercase;">Goal</div>
+            <div style="font-size:14px;font-weight:800;color:#17120F;margin-top:1px;">{{ goalLabel }}</div>
+          </div>
+        </div>
+        <div style="margin-top:20px;display:flex;align-items:flex-end;justify-content:space-between;">
+          <sc-for list="{{ bars }}" as="b" hint-placeholder-count="7">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;width:24px;">
+              <div style="width:9px;height:82px;background:#F7E6E6;border-radius:100px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;">
+                <div style="width:100%;border-radius:100px;background:{{ b.color }};height:{{ b.h }};"></div>
+              </div>
+              <span style="font-size:10px;color:#C2B3AF;font-weight:800;">{{ b.label }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="background:#fff;border:1px solid #F3E0E0;border-radius:24px;padding:18px;display:flex;justify-content:space-between;align-items:center;gap:10px;">
+          <div style="min-width:0;">
+            <div style="font-size:11.5px;color:#9A8B87;font-weight:700;">Workouts</div>
+            <div style="font-size:23px;font-weight:800;color:#17120F;margin-top:2px;">5</div>
+            <div style="font-size:10.5px;color:#C2B3AF;font-weight:600;">/7 sessions</div>
+          </div>
+          <div style="width:46px;height:46px;border-radius:50%;background:conic-gradient(#17120F 0 257deg,#F7E6E6 257deg 360deg);display:flex;align-items:center;justify-content:center;flex:none;"><span style="width:33px;height:33px;border-radius:50%;background:#fff;"></span></div>
+        </div>
+        <div style="background:#fff;border:1px solid #F3E0E0;border-radius:24px;padding:18px;display:flex;justify-content:space-between;align-items:center;gap:10px;">
+          <div style="min-width:0;">
+            <div style="font-size:11.5px;color:#9A8B87;font-weight:700;">Active time</div>
+            <div style="font-size:23px;font-weight:800;color:#17120F;margin-top:2px;">4h 25m</div>
+            <div style="font-size:10.5px;color:#C2B3AF;font-weight:600;">/6h</div>
+          </div>
+          <div style="width:46px;height:46px;border-radius:50%;background:conic-gradient(#17120F 0 265deg,#F7E6E6 265deg 360deg);display:flex;align-items:center;justify-content:center;flex:none;"><span style="width:33px;height:33px;border-radius:50%;background:#fff;"></span></div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px;background:#fff;border:1px solid #F3E0E0;border-radius:24px;padding:20px;">
+        <div style="font-size:11.5px;color:#9A8B87;font-weight:700;">This month</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:2px;">
+          <div>
+            <div style="font-size:26px;font-weight:800;color:#17120F;">+12%</div>
+            <div style="font-size:10.5px;color:#C2B3AF;font-weight:600;">vs last month</div>
+          </div>
+          <div style="display:flex;align-items:flex-end;gap:5px;height:48px;">
+            <sc-for list="{{ trend }}" as="p" hint-placeholder-count="10">
+              <span style="width:5px;border-radius:100px;background:#F0BABA;height:{{ p }};"></span>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══════════ WORKOUTS ══════════ -->
+  <sc-if value="{{ isWorkouts }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Workouts" style="position:absolute;inset:0;overflow:auto;padding:58px 24px 116px;animation:fadeUp 0.3s ease;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button onClick="{{ goHome }}" style="width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #F3E0E0;cursor:pointer;color:#17120F;display:flex;align-items:center;justify-content:center;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+          </button>
+          <span style="font-size:21px;font-weight:800;color:#17120F;">Workouts</span>
+        </div>
+        <span style="width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #F3E0E0;display:flex;align-items:center;justify-content:center;color:#17120F;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+        </span>
+      </div>
+
+      <div style="margin-top:18px;background:#fff;border:1px solid #F3E0E0;border-radius:100px;padding:13px 20px;display:flex;align-items:center;gap:10px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C2B3AF" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+        <input value="{{ search }}" onChange="{{ setSearch }}" placeholder="Search workouts" style="border:none;outline:none;background:transparent;font-size:13.5px;font-weight:600;color:#17120F;flex:1;">
+      </div>
+
+      <div style="margin-top:14px;display:flex;gap:6px;flex-wrap:wrap;">
+        <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
+          <button onClick="{{ f.go }}" style="border:1px solid {{ f.border }};border-radius:100px;padding:9px 17px;font-size:12px;font-weight:800;cursor:pointer;background:{{ f.bg }};color:{{ f.fg }};transition:all 0.15s ease;">{{ f.name }}</button>
+        </sc-for>
+      </div>
+
+      <div style="margin-top:24px;font-size:15px;font-weight:800;color:#17120F;">Recommended for you</div>
+      <div style="margin-top:12px;background:linear-gradient(90deg,rgba(15,10,9,0.9) 35%,rgba(15,10,9,0.45)),url('assets/gym.jpg') center 60%/cover no-repeat #161211;border-radius:24px;padding:24px;color:#FDF6F4;display:flex;align-items:center;justify-content:space-between;min-height:124px;cursor:pointer;transition:transform 0.15s ease;" style-hover="transform:scale(1.015);">
+        <div>
+          <div style="font-size:21px;font-weight:800;line-height:1.18;letter-spacing:-0.2px;">Upper Body<br>Strength</div>
+          <div style="margin-top:8px;font-size:12px;color:#A99B97;font-weight:600;">6 workouts</div>
+        </div>
+        <span style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;flex:none;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </span>
+      </div>
+
+      <div style="margin-top:26px;font-size:15px;font-weight:800;color:#17120F;">Popular workouts</div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px;">
+        <sc-for list="{{ workoutList }}" as="w" hint-placeholder-count="3">
+          <div style="background:#fff;border:1px solid #F3E0E0;border-radius:20px;padding:10px 12px 10px 10px;display:flex;align-items:center;gap:13px;" style-hover="border-color:#EBCFCF;">
+            <span style="width:54px;height:54px;border-radius:14px;background:url('{{ w.photo }}') center/cover no-repeat #161211;flex:none;"></span>
+            <div style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;">
+              <span style="font-size:14px;font-weight:800;color:#17120F;">{{ w.name }}</span>
+              <span style="font-size:11.5px;color:#9A8B87;font-weight:600;">{{ w.meta }}</span>
+            </div>
+            <span style="width:34px;height:34px;border-radius:50%;background:#17120F;color:#F5CBCB;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+            </span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══════════ PROFILE ══════════ -->
+  <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Profile" style="position:absolute;inset:0;overflow:auto;padding:58px 24px 116px;animation:fadeUp 0.3s ease;">
+      <div style="display:flex;justify-content:flex-end;">
+        <span style="width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #F3E0E0;display:flex;align-items:center;justify-content:center;color:#17120F;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6a7 7 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.06-.4.1-.8.1-1.2z"></path></svg>
+        </span>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;margin-top:6px;">
+        <span style="width:66px;height:66px;border-radius:50%;background:url('assets/coach.jpg') center 15%/cover no-repeat;flex:none;"></span>
+        <div>
+          <div style="font-size:26px;font-weight:800;color:#17120F;letter-spacing:-0.3px;">Sam</div>
+          <div style="font-size:12.5px;color:#9A8B87;font-weight:700;margin-top:1px;">Level 8</div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;background:#17120F;border-radius:24px;padding:20px;color:#FDF6F4;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:transform 0.15s ease;" style-hover="transform:scale(1.015);">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <span style="font-size:15px;font-weight:800;">Membership</span>
+          <span style="font-size:12px;color:#A99B97;display:flex;align-items:center;gap:7px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F5CBCB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4 4 5-7 5 7 4-4v9H3z"></path></svg>
+            Valid until 31 Aug 2026</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <sc-if value="{{ memberActive }}" hint-placeholder-val="{{ true }}">
+            <span style="font-size:10px;font-weight:800;letter-spacing:2px;color:#F5CBCB;background:rgba(245,203,203,0.12);border-radius:100px;padding:5px 10px;">ACTIVE</span>
+          </sc-if>
+          <sc-if value="{{ memberExpired }}" hint-placeholder-val="{{ false }}">
+            <span style="font-size:10px;font-weight:800;letter-spacing:2px;color:#E89090;background:rgba(232,144,144,0.12);border-radius:100px;padding:5px 10px;">EXPIRED</span>
+          </sc-if>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8a7c78" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;background:#fff;border:1px solid #F3E0E0;border-radius:24px;padding:4px 20px;display:flex;flex-direction:column;">
+        <sc-for list="{{ profileMenu }}" as="m" hint-placeholder-count="6">
+          <div style="display:flex;align-items:center;gap:14px;padding:15px 0;border-bottom:1px solid #F8EFEF;cursor:pointer;min-height:44px;" style-hover="opacity:0.65;">
+            <span style="width:36px;height:36px;border-radius:12px;background:#F9EDED;display:flex;align-items:center;justify-content:center;color:#17120F;flex:none;">{{ m.icon }}</span>
+            <span style="flex:1;font-size:13.5px;font-weight:700;color:#17120F;">{{ m.name }}</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D5C6C2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══════════ TAB BAR ══════════ -->
+  <sc-if value="{{ showTabBar }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:0;right:0;bottom:0;background:rgba(253,249,249,0.94);backdrop-filter:blur(14px);border-top:1px solid #F3E3E3;padding:10px 12px 24px;display:grid;grid-template-columns:repeat(5,1fr);z-index:50;">
+      <button onClick="{{ goHome }}" style="border:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;color:{{ homeC }};min-height:48px;padding-top:6px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg>
+        <span style="font-size:9.5px;font-weight:800;letter-spacing:0.2px;">Home</span>
+      </button>
+      <button onClick="{{ goClasses }}" style="border:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;color:{{ classesC }};min-height:48px;padding-top:6px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+        <span style="font-size:9.5px;font-weight:800;letter-spacing:0.2px;">Classes</span>
+      </button>
+      <button onClick="{{ goWorkouts }}" style="border:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;color:{{ workoutsC }};min-height:48px;padding-top:6px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 8v8M17 8v8M4 10v4M20 10v4M7 12h10"></path></svg>
+        <span style="font-size:9.5px;font-weight:800;letter-spacing:0.2px;">Workouts</span>
+      </button>
+      <button onClick="{{ goProgress }}" style="border:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;color:{{ progressC }};min-height:48px;padding-top:6px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 21V13M12 21V6M19 21V10"></path></svg>
+        <span style="font-size:9.5px;font-weight:800;letter-spacing:0.2px;">Progress</span>
+      </button>
+      <button onClick="{{ goProfile }}" style="border:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;color:{{ profileC }};min-height:48px;padding-top:6px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 5-5.5 8-5.5s6.5 1.5 8 5.5"></path></svg>
+        <span style="font-size:9.5px;font-weight:800;letter-spacing:0.2px;">Profile</span>
+      </button>
+    </div>
+  </sc-if>
+
+  <!-- home indicator -->
+  <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:130px;height:5px;border-radius:100px;background:{{ indicatorColor }};z-index:60;"></div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: {&quot;width&quot;: 460, &quot;height&quot;: 920},
+  &quot;startScreen&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;onboarding&quot;, &quot;login&quot;, &quot;home&quot;, &quot;classes&quot;, &quot;classDetail&quot;, &quot;schedule&quot;, &quot;progress&quot;, &quot;workouts&quot;, &quot;profile&quot;], &quot;default&quot;: &quot;onboarding&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Prototype&quot;},
+  &quot;membershipActive&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Data&quot;},
+  &quot;calorieGoal&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 2000, &quot;min&quot;: 500, &quot;max&quot;: 5000, &quot;step&quot;: 100, &quot;unit&quot;: &quot;kcal&quot;, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;Data&quot;}
+}">
+class Component extends DCLogic {
+  state = {
+    screen: 'onboarding',
+    day: 0,
+    schedTab: 'upcoming',
+    progTab: 'Overview',
+    filter: 'All',
+    search: '',
+    booked: false,
+    bookmarks: {},
+    email: '',
+    password: '',
+    showPw: false,
+    loginError: false,
+  };
+
+  go(screen) { this.setState({ screen }); }
+
+  renderVals() {
+    const s = this.state;
+    const startScreen = this.props.startScreen ?? 'onboarding';
+    if (!this._started) { this._started = true; if (startScreen !== 'onboarding') { s.screen = startScreen; } }
+
+    const DARK = '#17120F', PINK = '#F5CBCB', WHITE = '#fff';
+    const scr = s.screen;
+    const darkScreen = scr === 'classDetail' || scr === 'onboarding';
+
+    if (!this._qr) {
+      const cells = [];
+      let seed = 7;
+      for (let i = 0; i < 49; i++) {
+        seed = (seed * 31 + 17) % 97;
+        const r = Math.floor(i / 7), c = i % 7;
+        const corner = (r < 2 && c < 2) || (r < 2 && c > 4) || (r > 4 && c < 2);
+        cells.push(corner || seed % 2 === 0 ? '#17120F' : '#fff');
+      }
+      this._qr = cells;
+    }
+
+    // small stat icons built once (animation-safe static elements)
+    if (!this._icons) {
+      const e = React.createElement;
+      const svg = (paths, extra) => e('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }, ...paths.map((d, i) => e('path', { key: i, d })), extra || null);
+      this._icons = {
+        dumbbell: svg(['M7 8v8', 'M17 8v8', 'M4 10v4', 'M20 10v4', 'M7 12h10']),
+        flame: svg(['M12 3c1 3-3 4.5-3 8a3 3 0 0 0 6 0c0-1.5-.8-2.5-.8-2.5S17 10 17 13a5 5 0 0 1-10 0c0-4.5 5-6 5-10z']),
+        clock: svg(['M12 7v5l3 2'], React.createElement('circle', { cx: 12, cy: 12, r: 9 })),
+        user: svg(['M4 21c1.5-4 5-5.5 8-5.5s6.5 1.5 8 5.5'], React.createElement('circle', { cx: 12, cy: 8, r: 4 })),
+        card: svg(['M3 6h18v12H3z', 'M3 10h18']),
+        cal: svg(['M3 5h18v16H3z', 'M3 10h18', 'M8 3v4', 'M16 3v4']),
+        chart: svg(['M5 21V13', 'M12 21V6', 'M19 21V10']),
+        gift: svg(['M4 12v9h16v-9', 'M2 7h20v5H2z', 'M12 7v14', 'M12 7c-2-4-7-4-7-1s5 1 7 1', 'M12 7c2-4 7-4 7-1s-5 1-7 1']),
+        help: svg(['M9.5 9a2.5 2.5 0 1 1 3.4 2.3c-.8.3-.9 1-.9 1.7', 'M12 17h.01'], React.createElement('circle', { cx: 12, cy: 12, r: 9 })),
+      };
+    }
+    const ic = this._icons;
+
+    const mkDay = (name, num, i) => ({
+      name, num,
+      bg: s.day === i ? DARK : WHITE,
+      fg: s.day === i ? '#FDF6F4' : DARK,
+      border: s.day === i ? DARK : '#F3E0E0',
+      go: () => this.setState({ day: i }),
+    });
+
+    const PHOTOS = { gym: 'assets/gym.jpg', coach: 'assets/coach.jpg' };
+    const mkClass = (id, time, name, meta, coach) => ({
+      time, name, meta, coach,
+      photo: (id === 'hiit' || id === 'str') ? PHOTOS.coach : PHOTOS.gym,
+      bmBg: s.bookmarks[id] ? PINK : 'rgba(255,255,255,0.9)',
+      bmFg: s.bookmarks[id] ? DARK : '#B5A29E',
+      bmFill: s.bookmarks[id] ? DARK : 'none',
+      toggle: () => this.setState(p => ({ bookmarks: { ...p.bookmarks, [id]: !p.bookmarks[id] } })),
+      open: () => this.go('classDetail'),
+    });
+
+    const allMorning = [
+      mkClass('str', '06:00', 'Strength', '45 min • All levels', 'Siya'),
+      mkClass('yoga', '07:15', 'Yoga Flow', '60 min • All levels', 'Zoe'),
+      mkClass('hiit', '08:30', 'HIIT', '45 min • Intense', 'Lindiwe'),
+    ];
+    const morningClasses = s.day % 2 === 0 ? allMorning : allMorning.slice(0, 2);
+    const eveningClasses = [ mkClass('pil', '17:30', 'Pilates', '45 min • All levels', 'Sarah') ];
+
+    const goalNum = this.props.calorieGoal ?? 2000;
+    const cal = [1240, 980, 1430, 760, 1650, 540, 890];
+    const bars = ['M','T','W','T','F','S','S'].map((label, i) => ({
+      label,
+      h: Math.min(100, Math.round(cal[i] / goalNum * 100)) + '%',
+      color: i === 0 ? DARK : '#F0BABA',
+    }));
+
+    const trend = [30, 38, 34, 46, 42, 55, 50, 62, 70, 82].map(v => v + '%');
+
+    const mkSched = (dow, dom, time, name, coach, dur) => ({
+      dow, dom, time, name, coach, dur,
+      photo: name.includes('HIIT') ? PHOTOS.coach : PHOTOS.gym,
+      open: () => this.go('classDetail'),
+    });
+    const schedItems = s.schedTab === 'upcoming' ? [
+      mkSched('MON', '26', '18:00', 'HIIT Strength', 'Lindiwe', '45 min'),
+      mkSched('WED', '28', '07:15', 'Yoga Flow', 'Zoe', '60 min'),
+      mkSched('FRI', '30', '17:30', 'Pilates', 'Sarah', '45 min'),
+    ] : [
+      mkSched('THU', '22', '06:00', 'Strength', 'Siya', '45 min'),
+      mkSched('TUE', '20', '08:30', 'HIIT', 'Lindiwe', '45 min'),
+      mkSched('SUN', '18', '09:00', 'Yoga Flow', 'Zoe', '60 min'),
+    ];
+
+    const progTabs = ['Overview', 'Workouts', 'Body'].map(name => ({
+      name,
+      bg: s.progTab === name ? DARK : '#F0DBDB',
+      fg: s.progTab === name ? '#FDF6F4' : '#6B5B57',
+      go: () => this.setState({ progTab: name }),
+    }));
+
+    const filters = ['All', 'Strength', 'Cardio', 'Mobility', 'Core'].map(name => ({
+      name,
+      bg: s.filter === name ? DARK : WHITE,
+      fg: s.filter === name ? '#FDF6F4' : '#9A8B87',
+      border: s.filter === name ? DARK : '#F3E0E0',
+      go: () => this.setState({ filter: name }),
+    }));
+
+    const allWorkouts = [
+      { name: 'Full Body Burn', meta: '30 min • High Intensity', cat: 'Cardio', photo: PHOTOS.coach },
+      { name: 'Core Crusher', meta: '20 min • Core', cat: 'Core', photo: PHOTOS.gym },
+      { name: 'Lower Body Power', meta: '35 min • Strength', cat: 'Strength', photo: PHOTOS.gym },
+      { name: 'Morning Mobility', meta: '15 min • Mobility', cat: 'Mobility', photo: PHOTOS.coach },
+    ];
+    const q = s.search.toLowerCase();
+    const workoutList = allWorkouts.filter(w =>
+      (s.filter === 'All' || w.cat === s.filter) &&
+      (!q || w.name.toLowerCase().includes(q))
+    );
+
+    const active = this.props.membershipActive ?? true;
+    const tabC = k => scr === k ? DARK : '#C7B6B2';
+
+    return {
+      isOnboarding: scr === 'onboarding',
+      notOnboarding: scr !== 'onboarding' && scr !== 'login',
+      isLogin: scr === 'login',
+      goLogin: () => this.go('login'),
+      goOnboarding: () => this.go('onboarding'),
+      email: s.email,
+      password: s.password,
+      setEmail: e => this.setState({ email: e.target.value, loginError: false }),
+      setPassword: e => this.setState({ password: e.target.value, loginError: false }),
+      pwType: s.showPw ? 'text' : 'password',
+      togglePw: () => this.setState(p => ({ showPw: !p.showPw })),
+      emailBorder: s.loginError && !s.email ? '#E08D8D' : '#F3E0E0',
+      pwBorder: s.loginError && !s.password ? '#E08D8D' : '#F3E0E0',
+      loginError: s.loginError,
+      submitLogin: () => {
+        if (!s.email || !s.password) { this.setState({ loginError: true }); return; }
+        this.go('home');
+      },
+      isHome: scr === 'home',
+      isClasses: scr === 'classes',
+      isClassDetail: scr === 'classDetail',
+      isSchedule: scr === 'schedule',
+      isProgress: scr === 'progress',
+      isWorkouts: scr === 'workouts',
+      isProfile: scr === 'profile',
+      showTabBar: ['home','classes','workouts','progress','profile','schedule'].includes(scr),
+
+      statusColor: darkScreen ? '#FDF6F4' : DARK,
+      indicatorColor: darkScreen ? 'rgba(253,246,244,0.4)' : 'rgba(23,18,15,0.3)',
+
+      goHome: () => this.go('home'),
+      goClasses: () => this.go('classes'),
+      goClassDetail: () => this.go('classDetail'),
+      goSchedule: () => this.go('schedule'),
+      goProgress: () => this.go('progress'),
+      goWorkouts: () => this.go('workouts'),
+      goProfile: () => this.go('profile'),
+
+      homeC: tabC('home'), classesC: tabC('classes'), workoutsC: tabC('workouts'),
+      progressC: tabC('progress'), profileC: tabC('profile'),
+
+      qrCells: this._qr,
+      memberActive: active,
+      memberExpired: !active,
+
+      statCards: [
+        { icon: ic.dumbbell, label: 'Workouts', value: '5', sub: 'This week' },
+        { icon: ic.flame, label: 'Calories', value: '1 240', sub: 'kcal' },
+        { icon: ic.clock, label: 'Active time', value: '4h 25m', sub: 'Today' },
+      ],
+
+      days: [mkDay('MON',26,0), mkDay('TUE',27,1), mkDay('WED',28,2), mkDay('THU',29,3), mkDay('FRI',30,4)],
+      morningClasses, eveningClasses,
+
+      booked: s.booked,
+      notBooked: !s.booked,
+      bookClass: () => this.setState(p => ({ booked: !p.booked })),
+
+      schedUpcoming: () => this.setState({ schedTab: 'upcoming' }),
+      schedPast: () => this.setState({ schedTab: 'past' }),
+      upcomingBg: s.schedTab === 'upcoming' ? WHITE : 'transparent',
+      pastBg: s.schedTab === 'past' ? WHITE : 'transparent',
+      upcomingShadow: s.schedTab === 'upcoming' ? '0 2px 6px rgba(60,30,30,0.08)' : 'none',
+      pastShadow: s.schedTab === 'past' ? '0 2px 6px rgba(60,30,30,0.08)' : 'none',
+      schedTitle: s.schedTab === 'upcoming' ? 'This week' : 'Last week',
+      schedItems,
+
+      progTabs, bars, trend,
+      goalLabel: goalNum.toLocaleString('en-US').replace(',', ' '),
+
+      filters, workoutList,
+      search: s.search,
+      setSearch: e => this.setState({ search: e.target.value }),
+
+      profileMenu: [
+        { icon: ic.user, name: 'My profile' },
+        { icon: ic.card, name: 'Membership & billing' },
+        { icon: ic.cal, name: 'My bookings' },
+        { icon: ic.chart, name: 'My stats' },
+        { icon: ic.gift, name: 'Refer a friend' },
+        { icon: ic.help, name: 'Help & support' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

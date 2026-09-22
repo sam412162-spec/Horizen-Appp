@@ -1,0 +1,24 @@
+<svg width="1279" height="208" viewBox="0 0 1279 208" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g clip-path="url(#clip0_100_6665)">
+<mask id="mask0_100_6665" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="27" y="30" width="1225" height="294">
+<path d="M27 30H1251.38V323.756H27V30Z" fill="white"></path>
+</mask>
+<g mask="url(#mask0_100_6665)">
+<mask id="mask1_100_6665" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="26" y="29" width="1226" height="295">
+<rect x="26.7578" y="29.0996" width="1224.62" height="294.71" fill="url(#pattern0_100_6665)"></rect>
+</mask>
+<g mask="url(#mask1_100_6665)">
+<rect x="26.7578" y="29.0996" width="1224.62" height="156.445" fill="#E54F50"></rect>
+</g>
+</g>
+</g>
+<defs>
+<pattern id="pattern0_100_6665" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_100_6665" transform="scale(0.000524934 0.00217391)"></use>
+</pattern>
+<clipPath id="clip0_100_6665">
+<rect width="1279" height="208" fill="white"></rect>
+</clipPath>
+<image id="image0_100_6665" width="1905" height="460" preserveAspectRatio="none"></image>
+</defs>
+</svg>
