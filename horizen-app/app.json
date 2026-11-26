@@ -7,7 +7,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "backgroundColor": "#F7EAE8",
+    "backgroundColor": "#AA7155",
     "ios": {
       "bundleIdentifier": "com.horizengym.app",
       "supportsTablet": false,
@@ -37,9 +37,9 @@
         "expo-splash-screen",
         {
           "image": "./assets/splash-icon.png",
-          "imageWidth": 200,
+          "imageWidth": 240,
           "resizeMode": "contain",
-          "backgroundColor": "#F7EAE8"
+          "backgroundColor": "#AA7155"
         }
       ],
       "expo-web-browser",

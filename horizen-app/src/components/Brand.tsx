@@ -6,9 +6,9 @@ import { colors } from '@/theme';
 import { Txt } from './Txt';
 
 const wordmark = require('../../assets/images/logo-wordmark.png');
-const WORDMARK_RATIO = 390 / 100;
+const WORDMARK_RATIO = 755 / 236;
 
-/** Official "HORIZEN GYM" wordmark (red, transparent background). */
+/** Official "horizen — More than movement" wordmark (ink, transparent background). */
 export function Wordmark({ width }: { width: number }) {
   return (
     <Image

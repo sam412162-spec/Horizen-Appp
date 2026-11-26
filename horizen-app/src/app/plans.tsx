@@ -86,8 +86,8 @@ export default function PlansScreen() {
                     style={{
                       borderRadius: radius.pill,
                       borderWidth: 1,
-                      borderColor: 'rgba(245,203,203,0.25)',
-                      backgroundColor: 'rgba(245,203,203,0.14)',
+                      borderColor: 'rgba(198,173,157,0.25)',
+                      backgroundColor: 'rgba(198,173,157,0.14)',
                       paddingHorizontal: 10,
                       paddingVertical: 5,
                     }}

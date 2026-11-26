@@ -10,8 +10,8 @@ import { Txt } from './Txt';
 const STATUS: Record<InvoiceStatus, { label: string; fg: string; bg: string }> = {
   paid: { label: 'PAID', fg: colors.chipText, bg: 'rgba(255,255,255,0.6)' },
   due: { label: 'DUE', fg: colors.roseDeep, bg: colors.pinkTile },
-  overdue: { label: 'OVERDUE', fg: colors.alert, bg: 'rgba(232,144,144,0.2)' },
-  failed: { label: 'FAILED', fg: colors.alert, bg: 'rgba(232,144,144,0.2)' },
+  overdue: { label: 'OVERDUE', fg: colors.alert, bg: 'rgba(170,113,85,0.2)' },
+  failed: { label: 'FAILED', fg: colors.alert, bg: 'rgba(170,113,85,0.2)' },
 };
 
 export function InvoiceRow({ invoice }: { invoice: Invoice }) {

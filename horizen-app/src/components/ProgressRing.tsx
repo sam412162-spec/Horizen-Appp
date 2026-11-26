@@ -15,7 +15,7 @@ export function ProgressRing({ value, size = 46, stroke = 6.5 }: { value: number
         r={r}
         stroke="rgba(255,255,255,0.6)"
         strokeWidth={stroke}
-        fill="rgba(251,240,238,0.95)"
+        fill="rgba(251,243,238,0.95)"
       />
       <Circle
         cx={size / 2}

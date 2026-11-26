@@ -318,8 +318,8 @@ export function StatusPill({ active, small = false }: { active: boolean; small?:
       style={{
         borderRadius: radius.pill,
         borderWidth: 1,
-        borderColor: active ? 'rgba(245,203,203,0.25)' : 'rgba(232,144,144,0.25)',
-        backgroundColor: active ? 'rgba(245,203,203,0.14)' : 'rgba(232,144,144,0.14)',
+        borderColor: active ? 'rgba(198,173,157,0.25)' : 'rgba(170,113,85,0.25)',
+        backgroundColor: active ? 'rgba(198,173,157,0.14)' : 'rgba(170,113,85,0.14)',
         paddingHorizontal: small ? 10 : 11,
         paddingVertical: 5,
       }}

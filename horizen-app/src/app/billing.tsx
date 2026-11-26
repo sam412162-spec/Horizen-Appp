@@ -96,7 +96,7 @@ export default function BillingScreen() {
           </Glass>
 
           {billing.balance.amount > 0 && nextUnpaid ? (
-            <Glass elevated borderColor="rgba(224,141,141,0.5)" style={{ marginTop: 12, padding: 20 }}>
+            <Glass elevated borderColor="rgba(170,113,85,0.5)" style={{ marginTop: 12, padding: 20 }}>
               <Txt weight="bold" size={11.5} color={colors.muted}>
                 Amount due
               </Txt>

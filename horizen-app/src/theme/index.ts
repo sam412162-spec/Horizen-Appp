@@ -1,42 +1,53 @@
-// Design tokens taken from "Horizen App v2" (glassmorphism).
+// Design tokens. Layout and glass styling come from "Horizen App v2";
+// the palette is the "More than movement" brand: terracotta, sand and ink.
+
+export const brand = {
+  terracotta: '#AA7155',
+  terracottaDeep: '#7E4A33',
+  sand: '#C6AD9D',
+  sandLight: '#E7D8CD',
+  ink: '#17120F',
+} as const;
 
 export const colors = {
-  ink: '#17120F',
+  ink: brand.ink,
   inkSoft: 'rgba(23,18,15,0.9)',
   inkGlass: 'rgba(23,17,14,0.88)',
-  cream: '#FDF6F4',
-  pink: '#F5CBCB',
-  pinkSoft: 'rgba(245,203,203,0.45)',
-  pinkTile: 'rgba(245,203,203,0.4)',
-  pinkButton: 'rgba(245,203,203,0.92)',
-  rose: '#E9A5A5',
-  roseDeep: '#C07F7F',
-  alert: '#D2504F',
-  alertBorder: '#E08D8D',
-  expired: '#E89090',
+  cream: '#FBF3EE',
+  // "pink" tokens are the brand's sand accent (names kept so screens don't change)
+  pink: brand.sand,
+  pinkSoft: 'rgba(198,173,157,0.5)',
+  pinkTile: 'rgba(170,113,85,0.16)',
+  pinkButton: 'rgba(231,216,205,0.95)',
+  rose: brand.terracotta,
+  roseDeep: brand.terracottaDeep,
+  alert: '#A3361F',
+  alertBorder: '#C8735A',
+  expired: '#C8735A',
 
-  muted: '#9A8B87',
-  mutedDeep: '#8F7C78',
-  faint: '#C2B3AF',
-  label: '#B5A29E',
-  inactive: '#B3A09C',
-  chipText: '#6B5B57',
-  chevron: '#C7B6B2',
+  // Secondary text. Dark enough to read on the terracotta pattern and on glass cards.
+  muted: '#4A3226',
+  mutedDeep: '#3E2A20',
+  faint: '#6E5244',
+  label: '#5E4436',
+  inactive: '#6A4F41',
+  chipText: '#3E2A20',
+  chevron: '#6E5244',
 
-  onDarkMuted: '#C9BBB7',
-  onDarkFaint: '#A5978F',
-  onDarkLabel: '#A99B97',
+  onDarkMuted: '#D9C7BB',
+  onDarkFaint: '#B39C8E',
+  onDarkLabel: '#BFA898',
 
-  glass: 'rgba(255,255,255,0.45)',
-  glassStrong: 'rgba(255,255,255,0.55)',
-  glassInput: 'rgba(255,255,255,0.6)',
-  glassBorder: 'rgba(255,255,255,0.65)',
-  glassBorderStrong: 'rgba(255,255,255,0.7)',
-  hairline: 'rgba(120,80,80,0.15)',
+  glass: 'rgba(251,243,238,0.55)',
+  glassStrong: 'rgba(251,243,238,0.68)',
+  glassInput: 'rgba(251,243,238,0.72)',
+  glassBorder: 'rgba(251,243,238,0.7)',
+  glassBorderStrong: 'rgba(251,243,238,0.8)',
+  hairline: 'rgba(80,45,30,0.18)',
 
-  bgTop: '#FBF3F1',
-  bgMid: '#F7EAE8',
-  bgBottom: '#F4E2E0',
+  bgTop: brand.terracotta,
+  bgMid: brand.terracotta,
+  bgBottom: brand.terracotta,
 } as const;
 
 export const radius = {
@@ -66,14 +77,14 @@ export type FontWeight = keyof typeof fonts;
 
 export const shadow = {
   card: {
-    shadowColor: '#502828',
+    shadowColor: '#3A1E12',
     shadowOpacity: 0.07,
     shadowRadius: 16,
     shadowOffset: { width: 0, height: 12 },
     elevation: 2,
   },
   soft: {
-    shadowColor: '#502828',
+    shadowColor: '#3A1E12',
     shadowOpacity: 0.05,
     shadowRadius: 12,
     shadowOffset: { width: 0, height: 8 },
@@ -87,7 +98,7 @@ export const shadow = {
     elevation: 6,
   },
   tabBar: {
-    shadowColor: '#3C1E1E',
+    shadowColor: '#3A1E12',
     shadowOpacity: 0.16,
     shadowRadius: 20,
     shadowOffset: { width: 0, height: 16 },

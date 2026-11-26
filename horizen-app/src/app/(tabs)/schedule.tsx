@@ -91,7 +91,7 @@ export default function ScheduleScreen() {
         label="VIEW FULL SCHEDULE"
         compact
         onPress={() => router.navigate('/classes')}
-        style={{ marginTop: 24, backgroundColor: 'rgba(245,203,203,0.85)', borderColor: 'rgba(255,255,255,0.5)' }}
+        style={{ marginTop: 24, backgroundColor: 'rgba(198,173,157,0.85)', borderColor: 'rgba(255,255,255,0.5)' }}
       />
       <Txt weight="medium" size={11} color={colors.faint} style={{ marginTop: 10, textAlign: 'center' }}>
         Tap a class to see details or cancel.

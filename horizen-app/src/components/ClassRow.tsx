@@ -66,7 +66,7 @@ export function ClassRow({
             borderRadius: 12,
             borderWidth: 1,
             borderColor: 'rgba(255,255,255,0.5)',
-            backgroundColor: bookmarked ? 'rgba(245,203,203,0.95)' : 'rgba(255,255,255,0.35)',
+            backgroundColor: bookmarked ? 'rgba(198,173,157,0.95)' : 'rgba(255,255,255,0.35)',
             alignItems: 'center',
             justifyContent: 'center',
           }}

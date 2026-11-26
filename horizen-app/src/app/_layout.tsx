@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { AppProvider, useApp } from '@/state/AppState';
-import { colors } from '@/theme';
+import { brand, colors } from '@/theme';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -49,7 +49,7 @@ function RootStack() {
   return (
     <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.bgMid } }}>
       <Stack.Protected guard={!signedIn}>
-        <Stack.Screen name="index" options={{ contentStyle: { backgroundColor: '#161211' } }} />
+        <Stack.Screen name="index" options={{ contentStyle: { backgroundColor: brand.terracotta } }} />
         <Stack.Screen name="onboarding" options={{ animation: 'fade' }} />
         <Stack.Screen name="login" />
       </Stack.Protected>
