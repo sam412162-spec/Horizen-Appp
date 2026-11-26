@@ -42,7 +42,7 @@ export default function MembershipScreen() {
               style={{
                 marginTop: 20,
                 padding: 18,
-                borderRadius: radius.card,
+                borderRadius: radius.card, borderCurve: 'continuous',
                 backgroundColor: 'rgba(255,255,255,0.9)',
                 borderWidth: 1,
                 borderColor: 'rgba(255,255,255,0.95)',

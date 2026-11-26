@@ -46,7 +46,7 @@ export function ClassRow({
           Coach {session.coach.firstName}
         </Txt>
       </Touchable>
-      <View style={{ width: 76, height: 66, borderRadius: radius.md, overflow: 'hidden', backgroundColor: '#161211' }}>
+      <View style={{ width: 76, height: 66, borderRadius: radius.md, borderCurve: 'continuous', overflow: 'hidden', backgroundColor: '#161211' }}>
         <Image source={session.photo} style={{ width: '100%', height: '100%' }} contentFit="cover" />
         <Touchable
           onPress={() => {
@@ -63,7 +63,7 @@ export function ClassRow({
             right: 5,
             width: 24,
             height: 24,
-            borderRadius: 12,
+            borderRadius: 12, borderCurve: 'continuous',
             borderWidth: 1,
             borderColor: 'rgba(255,255,255,0.5)',
             backgroundColor: bookmarked ? 'rgba(198,173,157,0.95)' : 'rgba(255,255,255,0.35)',
@@ -96,7 +96,7 @@ export function BookingRow({ session, onPress }: { session: ClassSession; onPres
             backgroundColor: colors.pinkTile,
             borderWidth: 1,
             borderColor: 'rgba(255,255,255,0.6)',
-            borderRadius: radius.md,
+            borderRadius: radius.md, borderCurve: 'continuous',
             paddingVertical: 11,
           }}
         >

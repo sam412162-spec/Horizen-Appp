@@ -65,7 +65,7 @@ export default function CalorieGoalScreen() {
             accessibilityLabel={`${goal} kilocalories per day`}
             accessibilityLiveRegion="polite"
           >
-            <Txt weight="extrabold" size={44} tracking={-0.5} style={{ lineHeight: 50 }}>
+            <Txt weight="extrabold" size={44} tracking={-0.5} numeric style={{ lineHeight: 50 }}>
               {formatNumber(goal)}
             </Txt>
             <Txt weight="bold" size={12} tracking={1} color={colors.muted}>
@@ -136,7 +136,7 @@ function StepButton({
         style={{
           width: 48,
           height: 48,
-          borderRadius: 24,
+          borderRadius: 24, borderCurve: 'continuous',
           backgroundColor: colors.ink,
           alignItems: 'center',
           justifyContent: 'center',

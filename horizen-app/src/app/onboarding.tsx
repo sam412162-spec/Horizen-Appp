@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   },
   hero: {
     height: 300,
-    borderRadius: radius.panel,
+    borderRadius: radius.panel, borderCurve: 'continuous',
     overflow: 'hidden',
     backgroundColor: '#161211',
     borderWidth: 1,

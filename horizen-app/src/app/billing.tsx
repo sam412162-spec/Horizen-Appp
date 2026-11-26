@@ -100,7 +100,7 @@ export default function BillingScreen() {
               <Txt weight="bold" size={11.5} color={colors.muted}>
                 Amount due
               </Txt>
-              <Txt weight="extrabold" size={28} style={{ marginTop: 2 }}>
+              <Txt weight="extrabold" size={28} numeric selectable style={{ marginTop: 2 }}>
                 {formatMoney(billing.balance)}
               </Txt>
               <Txt
@@ -162,7 +162,7 @@ export default function BillingScreen() {
 const iconTile = {
   width: 36,
   height: 36,
-  borderRadius: 12,
+  borderRadius: 12, borderCurve: 'continuous',
   backgroundColor: colors.pinkTile,
   alignItems: 'center',
   justifyContent: 'center',

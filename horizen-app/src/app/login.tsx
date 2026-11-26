@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TextInput, View } from 'react-native';
+import { Alert, KeyboardAvoidingView, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { Path } from 'react-native-svg';
 
@@ -54,7 +54,7 @@ export default function LoginScreen() {
   return (
     <View style={{ flex: 1 }}>
       <AmbientBackground />
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={process.env.EXPO_OS === 'ios' ? 'padding' : undefined}>
         <ScrollView
           contentContainerStyle={{
             flexGrow: 1,
@@ -153,6 +153,7 @@ export default function LoginScreen() {
               weight="bold"
               size={12.5}
               color={colors.alert}
+              selectable
               style={{ marginTop: 12 }}
               accessibilityLiveRegion="polite"
             >

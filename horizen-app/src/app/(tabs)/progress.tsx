@@ -98,7 +98,7 @@ export default function ProgressScreen() {
               style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 2 }}
             >
               <View>
-                <Txt weight="extrabold" size={26}>
+                <Txt weight="extrabold" size={26} numeric>
                   {p.monthChangePct >= 0 ? '+' : ''}
                   {p.monthChangePct}%
                 </Txt>
@@ -131,7 +131,7 @@ function CaloriesCard({ p, goal }: { p: ProgressSummary; goal: number }) {
           <Txt weight="bold" size={11.5} color={colors.muted}>
             Calories today
           </Txt>
-          <Txt weight="extrabold" size={26} style={{ marginTop: 2 }}>
+          <Txt weight="extrabold" size={26} numeric style={{ marginTop: 2 }}>
             {formatNumber(today)}{' '}
             <Txt weight="semibold" size={13} color={colors.faint}>
               kcal
@@ -148,7 +148,7 @@ function CaloriesCard({ p, goal }: { p: ProgressSummary; goal: number }) {
               backgroundColor: colors.pinkTile,
               borderWidth: 1,
               borderColor: 'rgba(255,255,255,0.6)',
-              borderRadius: 14,
+              borderRadius: 14, borderCurve: 'continuous',
               paddingVertical: 9,
               paddingHorizontal: 14,
               alignItems: 'flex-end',

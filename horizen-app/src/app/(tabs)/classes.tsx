@@ -76,7 +76,7 @@ export default function ClassesScreen() {
               accessibilityState={{ selected: active }}
               style={{
                 flex: 1,
-                borderRadius: 18,
+                borderRadius: 18, borderCurve: 'continuous',
                 borderWidth: 1,
                 borderColor: active ? colors.inkSoft : colors.glassBorderStrong,
                 backgroundColor: active ? colors.inkSoft : 'rgba(255,255,255,0.5)',

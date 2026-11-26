@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Alert, Platform, ScrollView, Share, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Alert, ScrollView, Share, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Glass } from '@/components/Glass';
@@ -45,7 +45,7 @@ export default function ClassDetailScreen() {
       }
     };
     if (!booked) return run();
-    if (Platform.OS === 'web') return run();
+    if (process.env.EXPO_OS === 'web') return run();
     Alert.alert('Cancel booking?', `${session.name} • ${whenLabel.toLowerCase()}`, [
       { text: 'Keep', style: 'cancel' },
       { text: 'Cancel booking', style: 'destructive', onPress: run },
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
     width: '100%',
     paddingVertical: 17,
-    borderRadius: radius.lg,
+    borderRadius: radius.lg, borderCurve: 'continuous',
     borderWidth: 1.5,
     borderColor: 'rgba(198,173,157,0.6)',
     backgroundColor: 'rgba(198,173,157,0.08)',

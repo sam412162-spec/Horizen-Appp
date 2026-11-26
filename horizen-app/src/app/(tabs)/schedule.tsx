@@ -56,11 +56,7 @@ export default function ScheduleScreen() {
                 { flex: 1, borderRadius: radius.pill, paddingVertical: 11, alignItems: 'center' },
                 active && {
                   backgroundColor: 'rgba(255,255,255,0.85)',
-                  shadowColor: '#3C1E1E',
-                  shadowOpacity: 0.1,
-                  shadowRadius: 6,
-                  shadowOffset: { width: 0, height: 2 },
-                  elevation: 1,
+                  boxShadow: '0 2px 6px rgba(58,30,18,0.1)',
                 },
               ]}
             >

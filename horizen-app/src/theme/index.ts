@@ -75,33 +75,10 @@ export const fonts = {
 
 export type FontWeight = keyof typeof fonts;
 
+// CSS box-shadow strings (React Native's legacy shadow*/elevation props are not used).
 export const shadow = {
-  card: {
-    shadowColor: '#3A1E12',
-    shadowOpacity: 0.07,
-    shadowRadius: 16,
-    shadowOffset: { width: 0, height: 12 },
-    elevation: 2,
-  },
-  soft: {
-    shadowColor: '#3A1E12',
-    shadowOpacity: 0.05,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 1,
-  },
-  dark: {
-    shadowColor: '#17120F',
-    shadowOpacity: 0.2,
-    shadowRadius: 18,
-    shadowOffset: { width: 0, height: 14 },
-    elevation: 6,
-  },
-  tabBar: {
-    shadowColor: '#3A1E12',
-    shadowOpacity: 0.16,
-    shadowRadius: 20,
-    shadowOffset: { width: 0, height: 16 },
-    elevation: 10,
-  },
+  card: { boxShadow: '0 12px 16px rgba(58,30,18,0.07)' },
+  soft: { boxShadow: '0 8px 12px rgba(58,30,18,0.05)' },
+  dark: { boxShadow: '0 14px 18px rgba(23,18,15,0.2)' },
+  tabBar: { boxShadow: '0 16px 20px rgba(58,30,18,0.16)' },
 } as const;

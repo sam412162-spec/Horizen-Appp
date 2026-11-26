@@ -3,7 +3,7 @@ import { router } from 'expo-router';
 import type { ReactNode } from 'react';
 import {
   ActivityIndicator,
-  Platform,
+  
   Pressable,
   ScrollView,
   StyleSheet,
@@ -14,14 +14,14 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { colors, radius, shadow, space } from '@/theme';
+import { colors, radius, space } from '@/theme';
 import { AmbientBackground } from './AmbientBackground';
 import { Glass } from './Glass';
 import { Icon, type IconName } from './Icon';
 import { Txt } from './Txt';
 
 export function tapFeedback() {
-  if (Platform.OS !== 'web') Haptics.selectionAsync().catch(() => {});
+  if (process.env.EXPO_OS === 'ios') Haptics.selectionAsync().catch(() => {});
 }
 
 /** Pressable with a subtle press-in scale/opacity, matching the design's hover states. */
@@ -134,7 +134,7 @@ export function CtaButton({
         styles.cta,
         compact && { paddingVertical: 15 },
         dark
-          ? { backgroundColor: colors.inkSoft, ...shadow.dark, shadowOpacity: 0.25 }
+          ? { backgroundColor: colors.inkSoft, boxShadow: '0 14px 18px rgba(23,18,15,0.25)' }
           : { backgroundColor: colors.pinkButton, borderWidth: 1, borderColor: 'rgba(255,255,255,0.35)' },
         style,
       ]}
@@ -296,7 +296,7 @@ export function EmptyState({ text }: { text: string }) {
 export function ErrorState({ error, onRetry }: { error: Error; onRetry?: () => void }) {
   return (
     <Glass style={{ padding: 18, gap: 10 }} rounded={radius.card}>
-      <Txt weight="bold" size={13} color={colors.alert}>
+      <Txt weight="bold" size={13} color={colors.alert} selectable>
         {error.message}
       </Txt>
       {onRetry && (
@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: 17,
     paddingHorizontal: 24,
-    borderRadius: radius.lg,
+    borderRadius: radius.lg, borderCurve: 'continuous',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

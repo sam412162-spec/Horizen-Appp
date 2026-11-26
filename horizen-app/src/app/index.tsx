@@ -27,7 +27,7 @@ export default function StartScreen() {
           label="GET STARTED"
           variant="dark"
           onPress={() => router.push('/onboarding')}
-          style={{ borderRadius: 18, paddingVertical: 16, paddingHorizontal: 22 }}
+          style={{ borderRadius: 18, borderCurve: 'continuous', paddingVertical: 16, paddingHorizontal: 22 }}
         />
       </View>
     </View>

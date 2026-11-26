@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { router, type Href } from 'expo-router';
-import { Alert, Platform, View } from 'react-native';
+import { Alert, View } from 'react-native';
 
 import { MembershipCard } from '@/components/cards';
 import { Glass } from '@/components/Glass';
@@ -34,7 +34,7 @@ export default function ProfileScreen() {
   ];
 
   const confirmSignOut = () => {
-    if (Platform.OS === 'web') return void signOut();
+    if (process.env.EXPO_OS === 'web') return void signOut();
     Alert.alert('Sign out?', undefined, [
       { text: 'Cancel', style: 'cancel' },
       { text: 'Sign out', style: 'destructive', onPress: () => void signOut() },
@@ -100,7 +100,7 @@ export default function ProfileScreen() {
               style={{
                 width: 36,
                 height: 36,
-                borderRadius: 12,
+                borderRadius: 12, borderCurve: 'continuous',
                 backgroundColor: colors.pinkTile,
                 alignItems: 'center',
                 justifyContent: 'center',

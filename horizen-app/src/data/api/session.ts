@@ -1,5 +1,4 @@
 import * as SecureStore from 'expo-secure-store';
-import { Platform } from 'react-native';
 
 const KEY = 'horizen.session';
 
@@ -10,12 +9,12 @@ const KEY = 'horizen.session';
 let memoryToken: string | null = null;
 
 export async function getToken(): Promise<string | null> {
-  if (Platform.OS === 'web') return memoryToken;
+  if (process.env.EXPO_OS === 'web') return memoryToken;
   return SecureStore.getItemAsync(KEY);
 }
 
 export async function setToken(token: string | null): Promise<void> {
-  if (Platform.OS === 'web') {
+  if (process.env.EXPO_OS === 'web') {
     memoryToken = token;
     return;
   }

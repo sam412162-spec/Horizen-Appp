@@ -1,6 +1,6 @@
 import { BlurView } from 'expo-blur';
 import type { ReactNode } from 'react';
-import { Platform, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
+import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { colors, radius, shadow } from '@/theme';
 
@@ -41,7 +41,7 @@ export function Glass({
   style,
 }: Props) {
   const t = tones[tone];
-  const useBlur = blur > 0 && Platform.OS !== 'android';
+  const useBlur = blur > 0 && process.env.EXPO_OS !== 'android';
   const elevation =
     elevated === 'soft' ? shadow.soft : elevated === 'dark' ? shadow.dark : elevated ? shadow.card : undefined;
 
@@ -49,7 +49,7 @@ export function Glass({
     <View
       style={[
         {
-          borderRadius: rounded,
+          borderRadius: rounded, borderCurve: 'continuous',
           borderWidth: 1,
           borderColor: borderColor ?? t.border,
           backgroundColor: useBlur ? 'transparent' : (fill ?? t.bg),
@@ -59,7 +59,7 @@ export function Glass({
       ]}
     >
       {useBlur && (
-        <View style={[StyleSheet.absoluteFill, { borderRadius: rounded, overflow: 'hidden' }]} pointerEvents="none">
+        <View style={[StyleSheet.absoluteFill, { borderRadius: rounded, borderCurve: 'continuous', overflow: 'hidden' }]} pointerEvents="none">
           <BlurView intensity={blur} tint={t.tint} style={StyleSheet.absoluteFill} />
           <View style={[StyleSheet.absoluteFill, { backgroundColor: fill ?? t.bg }]} />
         </View>

@@ -41,7 +41,7 @@ export function PhotoCard({
       accessibilityLabel={accessibilityLabel}
       style={[styles.photoCard, { minHeight, padding }, shadow.dark, style]}
     >
-      <View style={[StyleSheet.absoluteFill, { borderRadius: radius.panel, overflow: 'hidden' }]}>
+      <View style={[StyleSheet.absoluteFill, { borderRadius: radius.panel, borderCurve: 'continuous', overflow: 'hidden' }]}>
         <Image source={photo} style={StyleSheet.absoluteFill} contentFit="cover" contentPosition={focus} />
         <LinearGradient
           colors={scrim}
@@ -118,7 +118,7 @@ export function MembershipCard({
 
 const styles = StyleSheet.create({
   photoCard: {
-    borderRadius: radius.panel,
+    borderRadius: radius.panel, borderCurve: 'continuous',
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.12)',
     backgroundColor: '#161211',

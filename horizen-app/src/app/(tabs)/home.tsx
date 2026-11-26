@@ -99,7 +99,7 @@ export default function HomeScreen() {
                 style={{
                   width: 96,
                   height: 96,
-                  borderRadius: 18,
+                  borderRadius: 18, borderCurve: 'continuous',
                   padding: 9,
                   backgroundColor: 'rgba(255,255,255,0.85)',
                   borderWidth: 1,
@@ -137,7 +137,7 @@ export default function HomeScreen() {
                   style={{
                     width: 30,
                     height: 30,
-                    borderRadius: 10,
+                    borderRadius: 10, borderCurve: 'continuous',
                     backgroundColor: colors.pinkSoft,
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -152,6 +152,7 @@ export default function HomeScreen() {
                   weight="extrabold"
                   size={20}
                   style={{ marginTop: 3, lineHeight: 22 }}
+                  numeric
                   numberOfLines={1}
                   adjustsFontSizeToFit
                 >

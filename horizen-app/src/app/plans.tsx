@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { Alert, Platform, View } from 'react-native';
+import { Alert, View } from 'react-native';
 
 import { showPaymentResult } from '@/components/billing';
 import { Glass } from '@/components/Glass';
@@ -32,7 +32,7 @@ export default function PlansScreen() {
 
   const confirm = (plan: Plan) => {
     const message = `${formatMoney(plan.price)} / ${plan.interval}. You'll be taken to our secure payment page.`;
-    if (Platform.OS === 'web') return void switchTo(plan);
+    if (process.env.EXPO_OS === 'web') return void switchTo(plan);
     Alert.alert(`Switch to ${plan.name}?`, message, [
       { text: 'Cancel', style: 'cancel' },
       { text: 'Continue', onPress: () => void switchTo(plan) },

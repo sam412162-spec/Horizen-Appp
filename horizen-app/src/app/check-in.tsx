@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Alert, Platform, View } from 'react-native';
+import { Alert, View } from 'react-native';
 
 import { Glass } from '@/components/Glass';
 import { Icon } from '@/components/Icon';
@@ -44,7 +44,7 @@ export default function CheckInScreen() {
   };
 
   const confirmCheckOut = () => {
-    if (Platform.OS === 'web') return void run('out');
+    if (process.env.EXPO_OS === 'web') return void run('out');
     Alert.alert('Check out?', 'This ends your current visit.', [
       { text: 'Stay', style: 'cancel' },
       { text: 'Check out', onPress: () => void run('out') },
@@ -126,7 +126,7 @@ export default function CheckInScreen() {
                   style={{
                     width: 60,
                     height: 60,
-                    borderRadius: 14,
+                    borderRadius: 14, borderCurve: 'continuous',
                     padding: 6,
                     backgroundColor: 'rgba(255,255,255,0.85)',
                   }}
@@ -239,7 +239,7 @@ function VisitRow({ visit }: { visit: Visit }) {
           backgroundColor: colors.pinkTile,
           borderWidth: 1,
           borderColor: 'rgba(255,255,255,0.6)',
-          borderRadius: radius.md,
+          borderRadius: radius.md, borderCurve: 'continuous',
           paddingVertical: 11,
         }}
       >
